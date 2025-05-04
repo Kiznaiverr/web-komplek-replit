@@ -10,7 +10,7 @@ const PORT = 3000;
 
 // Update CORS configuration untuk izinkan akses dari domain Vercel
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://komplek-web.vercel.app'],
+    origin: ['http://localhost:3000', 'https://web-komplek-replit.vercel.app'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
