@@ -1,5 +1,3 @@
-import { isProduction } from '../../config/api.js';
-
 // Show/Hide password toggle
 document.getElementById('togglePassword').addEventListener('click', function() {
     const password = document.getElementById('password');
