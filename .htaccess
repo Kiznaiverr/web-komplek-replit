@@ -1,0 +1,12 @@
+RewriteEngine On
+RewriteBase /
+
+# Handle admin routes
+RewriteRule ^login/?$ admin/login.html [L]
+RewriteRule ^dashboard/?$ admin/dashboard.html [L]
+RewriteRule ^editor/?$ admin/editor.html [L]
+
+# Remove .html extension
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [L]

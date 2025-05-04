@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Asrama Sayid Abdurrahman</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <div id="authError" style="display:none; text-align:center; padding: 20px; background: #ff5757; color: white;">
+        Session expired. Please <a href="/login" style="color: white; text-decoration: underline;">login again</a>.
+    </div>
+    <div class="admin-container">
+        <nav class="admin-nav">
+            <div class="admin-header">
+                <h1><i class="fas fa-user-shield"></i> Admin Dashboard</h1>
+                <div class="nav-buttons">
+                    <a href="../index.html" class="btn-home"><i class="fas fa-home"></i> Beranda</a>
+                    <button id="logoutBtn" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+            </div>
+        </nav>
+        
+        <main class="admin-content">
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <i class="fas fa-newspaper"></i>
+                    <div class="stat-info">
+                        <h3>Total Artikel</h3>
+                        <span id="totalArticles">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button id="newArticleBtn" class="btn-primary">
+                    <i class="fas fa-plus"></i> Artikel Baru
+                </button>
+            </div>
+
+            <div class="articles-list">
+                <h2><i class="fas fa-list"></i> Daftar Artikel</h2>
+                <div id="articlesList" class="articles-grid"></div>
+            </div>
+        </main>
+
+        <!-- Modal -->
+        <div id="articleModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalTitle">Artikel Baru</h2>
+                    <button class="close-btn" onclick="closeModal()">×</button>
+                </div>
+                <form id="articleForm">
+                    <div class="form-group">
+                        <label for="title">Judul Artikel</label>
+                        <input type="text" id="title" required placeholder="Masukkan judul artikel">
+                    </div>
+                    <div class="form-group">
+                        <label for="imageUrl">URL Gambar</label>
+                        <input type="url" id="imageUrl" placeholder="https://example.com/image.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Konten Artikel</label>
+                        <textarea id="content" required placeholder="Tulis konten artikel di sini"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="closeModal()">Batal</button>
+                        <button type="submit" class="btn-primary">Simpan Artikel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Handle script loading errors
+        window.addEventListener('error', function(e) {
+            if (e.message.includes('process is not defined')) {
+                window.location.replace('/login');
+            }
+        });
+    </script>
+    <script src="../javascript/admin/dashboard.js" type="module"></script>
+</body>
+</html>
