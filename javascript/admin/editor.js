@@ -1,4 +1,4 @@
-import { API_URL, CLOUDINARY_CONFIG } from '../../config/api.js';
+import { CLOUDINARY_CONFIG } from '../../config/api.js';
 import config from '../config.js';
 
 // Initial variable
@@ -105,8 +105,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     return;
                 }
 
-                // Read existing articles
-                const response = await fetch('http://localhost:3000/data/articles.json');
+                // Read existing articles - update URL
+                const response = await fetch('https://web-komplek-replit.vercel.app/data/articles.json');
                 let articles = await response.json() || [];
 
                 const articleId = new URLSearchParams(window.location.search).get('id');
@@ -137,8 +137,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     }];
                 }
 
-                // Save to articles.json
-                const saveResponse = await fetch('http://localhost:3000/data/articles.json', {
+                // Save to articles.json - update URL
+                const saveResponse = await fetch('https://web-komplek-replit.vercel.app/data/articles.json', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load existing article
     const articleId = new URLSearchParams(window.location.search).get('id');
     if (articleId) {
-        fetch('/data/articles.json')
+        fetch('https://web-komplek-replit.vercel.app/data/articles.json')
             .then(res => res.json())
             .then(articles => {
                 const article = articles.find(a => a.id === articleId);
