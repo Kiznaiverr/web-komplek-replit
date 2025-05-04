@@ -6,11 +6,11 @@ const multer = require('multer');
 const sharp = require('sharp');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-// Update CORS configuration untuk izinkan akses dari domain Vercel
+// Update CORS configuration to only use Vercel domain
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://web-komplek-replit.vercel.app'],
+    origin: 'https://web-komplek-replit.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
     exposedHeaders: ['Access-Control-Allow-Origin'],
@@ -238,7 +238,7 @@ app.get('/data/articles.json', cors(), async (req, res) => {
 Promise.all([createUploadDirs(), initializeDataDir()])
     .then(() => {
         app.listen(PORT, () => {
-            console.log(`Server running on http://localhost:${PORT}`);
+            console.log(`Server running on port ${PORT}`);
         });
     })
     .catch(err => {
