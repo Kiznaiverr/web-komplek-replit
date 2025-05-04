@@ -1,5 +1,3 @@
-import { API_URL } from '../config/api.js';
-
 async function loadArticleDetail() {
     const articleId = new URLSearchParams(window.location.search).get('id');
     const container = document.getElementById('articleContent');
@@ -10,7 +8,7 @@ async function loadArticleDetail() {
     }
 
     try {
-        const response = await fetch('/data/articles.json');
+        const response = await fetch('https://web-komplek-replit.vercel.app/data/articles.json');
         const articles = await response.json();
         const article = articles.find(a => a.id === articleId);
         

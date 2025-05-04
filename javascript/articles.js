@@ -1,11 +1,9 @@
-import { API_URL } from '../config/api.js';
-
 // Load articles from API
 async function loadArticles() {
     const container = document.getElementById('articlesContainer');
     
     try {
-        const response = await fetch('/data/articles.json');
+        const response = await fetch('https://web-komplek-replit.vercel.app/data/articles.json');
         const articles = await response.json();
 
         if (articles.length === 0) {

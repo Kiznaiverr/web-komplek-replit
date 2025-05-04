@@ -1,5 +1,4 @@
 import { CLOUDINARY_CONFIG } from '../../config/api.js';
-import config from '../config.js';
 
 // Initial variable
 let editingImage = null;

@@ -1,5 +1,3 @@
-import { API_URL, isProduction } from '../../config/api.js';
-
 // Check authentication function
 function checkAuth() {
     const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
@@ -43,7 +41,7 @@ let articles = [];
 // Load articles from data file
 async function loadArticles() {
     try {
-        const response = await fetch('/data/articles.json');
+        const response = await fetch('https://web-komplek-replit.vercel.app/data/articles.json');
         if (!response.ok) throw new Error('Failed to fetch articles');
         articles = await response.json() || [];
         renderArticles();
