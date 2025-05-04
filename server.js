@@ -1,29 +1,13 @@
 const express = require('express');
 const fs = require('fs').promises;
 const path = require('path');
-const cors = require('cors');
 const multer = require('multer');
 const sharp = require('sharp');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Update CORS configuration to only use Vercel domain
-app.use(cors({
-    origin: 'https://web-komplek-replit.vercel.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-    exposedHeaders: ['Access-Control-Allow-Origin'],
-    credentials: true,
-    optionsSuccessStatus: 204
-}));
-
-// Add a pre-flight handler
-app.options('*', cors());
-
 app.use(express.json());
-
-// Serve static files first
 app.use(express.static('.'));
 
 // Ensure upload directories exist
@@ -214,7 +198,7 @@ app.delete('/api/articles/:id', async (req, res) => {
 });
 
 // Add endpoint to handle articles.json operations
-app.post('/data/articles.json', cors(), async (req, res) => {
+app.post('/data/articles.json', async (req, res) => {
     try {
         await fs.writeFile(ARTICLES_FILE, JSON.stringify(req.body, null, 2));
         res.json({ success: true });
@@ -224,7 +208,7 @@ app.post('/data/articles.json', cors(), async (req, res) => {
     }
 });
 
-app.get('/data/articles.json', cors(), async (req, res) => {
+app.get('/data/articles.json', async (req, res) => {
     try {
         const data = await fs.readFile(ARTICLES_FILE, 'utf8');
         res.json(JSON.parse(data));
