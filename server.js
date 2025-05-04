@@ -12,9 +12,14 @@ const PORT = 3000;
 app.use(cors({
     origin: ['http://localhost:3000', 'https://web-komplek-replit.vercel.app'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    exposedHeaders: ['Access-Control-Allow-Origin'],
+    credentials: true,
+    optionsSuccessStatus: 204
 }));
+
+// Add a pre-flight handler
+app.options('*', cors());
 
 app.use(express.json());
 
@@ -209,7 +214,7 @@ app.delete('/api/articles/:id', async (req, res) => {
 });
 
 // Add endpoint to handle articles.json operations
-app.post('/data/articles.json', async (req, res) => {
+app.post('/data/articles.json', cors(), async (req, res) => {
     try {
         await fs.writeFile(ARTICLES_FILE, JSON.stringify(req.body, null, 2));
         res.json({ success: true });
@@ -219,7 +224,7 @@ app.post('/data/articles.json', async (req, res) => {
     }
 });
 
-app.get('/data/articles.json', async (req, res) => {
+app.get('/data/articles.json', cors(), async (req, res) => {
     try {
         const data = await fs.readFile(ARTICLES_FILE, 'utf8');
         res.json(JSON.parse(data));
